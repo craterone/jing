@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    td{
+        width: 50px;
+        height: 50px;
+        background-color: #888888;
+    }
+</style>
+<body>
+    <table>
+        <tr><td id="e00" data-checked=false></td><td id="e01" data-checked=false></td><td id="e02" data-checked=false></td></tr>
+        <tr><td id="e10" data-checked=false></td><td id="e11" data-checked=false></td><td id="e12" data-checked=false></td></tr>
+        <tr><td id="e20" data-checked=false></td><td id="e21" data-checked=false></td><td id="e22" data-checked=false></td></tr>
+    </table>
+<script>
+
+
+    let base_data = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ]
+
+    let i = 2, j = 0;
+
+    base_data[i][j] = 10;
+    console.log(base_data);
+    // base_data[i][j] = 0;
+
+    // test()
+
+    // function boxCheck(element,flag){
+    //     // O 1 , X 2
+        
+    //     element.dataset.checked = true;
+        
+    //     let i;
+    //     if(flag == O_FLAG){
+    //         i = 'o'
+    //     }else{
+    //         i = 'x'
+    //     }
+
+    //     element.style.background = `url(${i}.png) no-repeat center center`
+
+    // }
+
+
+    // for(let i = 0;i<3;i++){
+    //     for(let j = 0;j<3;j++){
+    //         let element = document.querySelector(`#e${i}${j}`)
+    //         element.onclick = _=>{
+    //             if(element.dataset.checked == 'true'){
+    //                 console.log('checked!');
+    //             }else{
+    //                 let flag = O_FLAG
+    //                 boxCheck(element,flag)
+    //                 base_data[i][j] = flag
+    //                 console.log(`${i}-${j} ???`);
+
+    //                 // if(!isWon(flag,base_data)){
+    //                 // }
+                    
+    //                 for(let i = 0;i < 3; i++){
+    //                     for(let j = 0; j < 3; j++){
+    //                         if(base_data[i][j] == 0){
+    //                             base_data[i][j] = -flag;
+    //                             let val = iPlay(-flag);
+    //                             base_data[i][j] = 0;
+    //                             // console.log(`${i},${j} - ${val}`);
+    //                         }
+                            
+    //                     }
+    //                 }                       
+
+    //             }
+
+    //         }
+    //     }
+    // }
+
+    // // I 1 , R -1
+
+    // function iPlay(player){
+    //     console.log(`iplay ${player} no ban`)
+        
+    //     if(isWon(player)){
+    //         console.log(`${player} won`);
+    //         return player;
+    //     }else if(isDraw()){
+    //         console.log(`draw`);
+    //         return 0;
+    //     }
+
+    //     if(player == O_FLAG){
+    //         // let maxEval = -Infinity;
+    //         // for(let i = 0;i < 3; i++){
+    //         //     for(let j = 0; j < 3; j++){
+    //         //         if(base_data[i][j] == 0){
+    //         //             base_data[i][j] = -player;
+    //         //             let val = iPlay(-player);
+    //         //             base_data[i][j] = 0;
+    //         //             maxEval = Math.max(maxEval,val)
+    //         //             return maxEval
+    //         //         }
+    //         //     }
+    //         // }
+    //     }else{
+    //         let minEval = Infinity;
+    //         for(let i = 0;i < 3; i++){
+    //             for(let j = 0; j < 3; j++){
+    //                 if(base_data[i][j] == 0){
+    //                     // console.log(`${i}-${j}`);
+    //                     console.log(`${i}-${j}`);
+    //                     console.log(base_data);
+    //                     base_data[i][j] = 6;
+    //                     console.log(base_data[i][j]);
+    //                     console.log(base_data);
+
+    //                     // base_data[i][j] = -player;
+    //                     // let val = iPlay(-player);
+    //                     base_data[i][j] = 0;
+    //                     // minEval = Math.min(minEval,val)
+    //                     // return minEval
+    //                 }
+                    
+    //             }
+    //         }
+    //     }
+    // }
+
+    // // function iPlay2(player){
+    // //     console.log(`iplay2 ${player} no ban`)
+        
+    // //     if(isWon(player)){
+    // //         console.log(`${player} won`);
+    // //         return player;
+    // //     }else if(isDraw()){
+    // //         console.log(`draw`);
+    // //         return 0;
+    // //     }
+
+    // //     if(player == O_FLAG){
+    // //         let maxEval = -Infinity;
+    // //         for(let i = 0;i < 3; i++){
+    // //             for(let j = 0; j < 3; j++){
+    // //                 if(base_data[i][j] != 0){
+    // //                     base_data[i][j] = -player;
+    // //                     let val = iPlay(-player);
+    // //                     base_data[i][j] = 0;
+    // //                     maxEval = Math.max(maxEval,val)
+    // //                     return maxEval
+    // //                 }
+    // //             }
+    // //         }
+    // //     }else{
+    // //         let minEval = Infinity;
+    // //         for(let i = 0;i < 3; i++){
+    // //             for(let j = 0; j < 3; j++){
+    // //                 if(base_data[i][j] != 0){
+    // //                     base_data[i][j] = -player;
+    // //                     let val = iPlay(-player);
+    // //                     base_data[i][j] = 0;
+    // //                     minEval = Math.min(minEval,val)
+    // //                     return minEval
+    // //                 }
+                    
+    // //             }
+    // //         }
+    // //     }
+    // // }
+    
+    // function isDraw(){
+    //     for(let i = 0;i<3;i++){
+    //         for(let j = 0;j<3;j++){
+    //             if(base_data[i][j] == 0){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    //     return true;
+
+    // }
+
+
+  
+    // function isWon(flag){
+    //     let data = base_data;
+
+    //     if( (data[0][0] == flag && data[0][1] == flag && data[0][2] == flag) ||
+    //         (data[1][0] == flag && data[1][1] == flag && data[1][2] == flag) || 
+    //         (data[2][0] == flag && data[2][1] == flag && data[2][2] == flag) ||
+    //         (data[0][0] == flag && data[1][0] == flag && data[2][0] == flag) ||
+    //         (data[0][1] == flag && data[1][1] == flag && data[2][1] == flag) ||
+    //         (data[0][2] == flag && data[1][2] == flag && data[2][2] == flag) ||
+    //         (data[0][0] == flag && data[1][1] == flag && data[2][2] == flag) ||
+    //         (data[0][2] == flag && data[1][1] == flag && data[2][0] == flag)
+    //     ){
+    //         console.log('won!');
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+</script>
+</body>
+</html>
