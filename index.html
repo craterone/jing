@@ -58,6 +58,8 @@
                     // console.log(`${i}-${j} ???`);
                     if(isWon(flag)){
                         alert('You won!');
+                    }else if(isDraw(flag)){
+                        alert('draw!');
                     }else{
                         let min = Infinity;
                         let point = [0,0];
@@ -65,7 +67,7 @@
                             for(let j = 0; j < 3; j++){
                                 if(base_data[i][j] == 0){
                                     base_data[i][j] = -flag;
-                                    let val = iPlay(flag);
+                                    let val = iPlay(-flag);
                                     base_data[i][j] = 0;
                                     console.log(`${i},${j} ~ ${val}`);
                                     if(min > val){
@@ -73,9 +75,10 @@
                                         point = [i,j];
                                     }
                                 }
-                                
                             }
                         }  
+
+
 
                         let [x,y] = point
                         let e = document.querySelector(`#e${x}${y}`)
@@ -111,6 +114,7 @@
             // console.log(`draw`);
             return 0;
         }
+        player = -player;
 
         if(player == O_FLAG){
             let maxEval = -Infinity;
@@ -122,7 +126,7 @@
                         }
 
                         base_data[i][j] = player;
-                        let val = iPlay(-player);
+                        let val = iPlay(player);
                         base_data[i][j] = 0;
                         maxEval = Math.max(maxEval,val)
                     }
@@ -141,7 +145,7 @@
                         }
                         // console.log(`${i}-${j}`);
                         base_data[i][j] = player;
-                        let val = iPlay(-player);
+                        let val = iPlay(player);
                         base_data[i][j] = 0;
                         minEval = Math.min(minEval,val)
                     }
