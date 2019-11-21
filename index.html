@@ -67,7 +67,7 @@
                             for(let j = 0; j < 3; j++){
                                 if(base_data[i][j] == 0){
                                     base_data[i][j] = -flag;
-                                    let val = iPlay(-flag);
+                                    let val = iPlay(-flag, -Infinity, Infinity);
                                     base_data[i][j] = 0;
                                     console.log(`${i},${j} ~ ${val}`);
                                     if(min > val){
@@ -101,7 +101,7 @@
 
     // I 1 , R -1
     let DEBUG = false;
-    function iPlay(player){
+    function iPlay(player, alpha, beta){
         // console.log(base_data)
         // console.log(`iplay ${player} no ban`)
         
@@ -126,9 +126,14 @@
                         }
 
                         base_data[i][j] = player;
-                        let val = iPlay(player);
+                        let val = iPlay(player, alpha, beta);
                         base_data[i][j] = 0;
                         maxEval = Math.max(maxEval,val)
+
+                        alpha = Math.max(alpha,val)
+                        if (alpha >= beta) {
+                            return maxEval
+                        }
                     }
                 }
             }
@@ -145,9 +150,14 @@
                         }
                         // console.log(`${i}-${j}`);
                         base_data[i][j] = player;
-                        let val = iPlay(player);
+                        let val = iPlay(player, alpha, beta);
                         base_data[i][j] = 0;
                         minEval = Math.min(minEval,val)
+
+                        beta = Math.min(beta,val)
+                        if (alpha >= beta) {
+                            return minEval
+                        }
                     }
                     
                 }
